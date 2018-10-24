@@ -2,7 +2,7 @@
 #include "HeapFactory.h"
 
 Heap* HeapFactory::defaultHeap = nullptr;
-std::vector<Heap*> HeapFactory::heapContainer = { HeapFactory::defaultHeap };
+std::vector<Heap*> HeapFactory::heapContainer;
 
 HeapFactory::HeapFactory() {}
 
@@ -22,7 +22,7 @@ Heap * HeapFactory::CreateHeap(const char * szName)
 
 void HeapFactory::CreateDefaultHeap()
 {
-	defaultHeap = (Heap*)malloc(sizeof(Heap));
+	defaultHeap = (Heap*)malloc(sizeof(Heap("default")));
 	heapContainer.push_back(defaultHeap);
 }
 
