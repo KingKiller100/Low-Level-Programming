@@ -1,14 +1,10 @@
 #include "stdafx.h"
-#include <iostream>
 #include "HeapFactory.h"
 
-std::vector<Heap*> HeapFactory::heapContainer;
 Heap* HeapFactory::defaultHeap = nullptr;
+std::vector<Heap*> HeapFactory::heapContainer = { HeapFactory::defaultHeap };
 
-HeapFactory::HeapFactory()
-{
-	CreateDefaultHeap();
-}
+HeapFactory::HeapFactory() {}
 
 HeapFactory::~HeapFactory()
 {
@@ -17,7 +13,7 @@ HeapFactory::~HeapFactory()
 
 Heap * HeapFactory::CreateHeap(const char * szName)
 {
-	Heap *newHeap = (Heap*)malloc(sizeof(Heap(szName)));
+	Heap *newHeap = new Heap(szName);
 
 	heapContainer.push_back(newHeap);
 

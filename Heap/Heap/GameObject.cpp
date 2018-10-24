@@ -16,7 +16,6 @@ GameObject::GameObject(int id)
 
 GameObject::~GameObject()
 {
-	std::cout << "GameObject is deleted" << std::endl;
 }
 
 void * GameObject::operator new(size_t size)
@@ -24,13 +23,14 @@ void * GameObject::operator new(size_t size)
 	if (s_pHeap == nullptr)
 		s_pHeap = HeapFactory::CreateHeap("Game Object");
 
-	return :: operator new(sizeof(GameObject));
+	return MemoryManagement::operator new(sizeof(GameObject));
 }
 
 void GameObject::operator delete(void* pMem, size_t size)
 {
 	//s_pHeap->RemoveAllocation(size);
-	::operator delete(pMem);
+	MemoryManagement::operator delete(pMem);
+	std::cout << "GameObject is deleted" << std::endl;
 }
 
 

@@ -4,7 +4,7 @@
 
 Heap::Heap()
 {
-	m_name = (char*)("");
+	m_name = (char*)(" ");
 	m_allocatedBytes = 0;
 }
 

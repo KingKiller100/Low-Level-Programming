@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Structures.h"
 
-void * operator new(size_t size)
+void * MemoryManagement::operator new(size_t size)
 {
 	Heap *h = HeapFactory::GetDefaultHeap();
 
@@ -16,20 +16,20 @@ void * operator new(size_t size)
 		return pStartMemBlock;
 	}
 
-	return operator new(size, h);
+	return MemoryManagement::operator new(size, h);
 }
 
-void operator delete(void * pMem)
+void MemoryManagement::operator delete(void * pMem)
 {
 	AllocHeader *pHeader = (AllocHeader*)((char*)pMem - sizeof(AllocHeader));
 
-if (pHeader->pHeap != NULL)
-	pHeader->pHeap->RemoveAllocation(pHeader->iSize);
+	if (pHeader->pHeap != NULL)
+		pHeader->pHeap->RemoveAllocation(pHeader->iSize);
 
 	free(pHeader);
 }
 
-void * operator new(size_t size, Heap * pHeap)
+void * MemoryManagement::operator new(size_t size, Heap * pHeap)
 {
 	size_t nRequestedBytes = size + sizeof(AllocHeader);
 	char *pMem = (char*)malloc(nRequestedBytes);

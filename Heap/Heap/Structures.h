@@ -7,7 +7,13 @@ struct AllocHeader
 	int iSize;
 };
 
-void * operator new(size_t size);
-void * operator new(size_t size, Heap *pHeap);
-void operator delete (void *pMem);
+class MemoryManagement
+{
+public:
+	static void * operator new(size_t size);
+	static void * operator new(size_t size, Heap *pHeap);
+	static void operator delete (void *pMem);
+
+};
+
 
