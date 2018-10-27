@@ -8,7 +8,9 @@ private:
 
 public:
 	Heap();
-	Heap(char *name);
+	Heap(const char *name);
+
+	void SetName(const char *n)				{ m_name = (char*)n; }
 	char *GetName() const					{ return m_name; };
 	
 	void AddAllocation(size_t size);

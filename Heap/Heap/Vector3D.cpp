@@ -3,7 +3,7 @@
 #include "Structures.h"
 #include <iostream>
 
-Heap *Vector3D::s_Heap = nullptr;
+Heap *Vector3D::v_Heap = nullptr;
 
 Vector3D::Vector3D()
 {
@@ -12,7 +12,10 @@ Vector3D::Vector3D()
 	std::cout << "V3D Constructor Called" << std::endl;
 }
 
-Vector3D::Vector3D(const double & x, const double & y, const double & z) : x(x), y(y), z(z) {/* Empty */}
+Vector3D::Vector3D(const double & x, const double & y, const double & z) : x(x), y(y), z(z) 
+{
+	std::cout << "V3D Constructor Called" << std::endl;
+}
 
 
 Vector3D::~Vector3D()
@@ -22,8 +25,8 @@ Vector3D::~Vector3D()
 
 void * Vector3D::operator new(size_t size)
 {
-	if (!s_Heap)
-		s_Heap = HeapFactory::CreateHeap("V3D");
+	if (!v_Heap)
+		v_Heap = HeapFactory::CreateHeap("V3D");
 
 	return MemoryManagement::operator new(sizeof(Vector3D));
 }

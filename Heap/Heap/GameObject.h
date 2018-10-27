@@ -6,7 +6,7 @@ class GameObject
 private:
 	int m_id;
 	static int count;
-	static Heap *s_pHeap;
+	static Heap *go_pHeap;
 
 public:
 	GameObject(int id);

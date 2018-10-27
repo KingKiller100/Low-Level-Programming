@@ -7,7 +7,7 @@ private:
 	double x;
 	double y;
 	double z;
-	static Heap *s_Heap;
+	static Heap *v_Heap;
 
 public:
 	Vector3D();

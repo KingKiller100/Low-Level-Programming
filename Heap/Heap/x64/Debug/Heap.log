@@ -1,15 +1,4 @@
-﻿  GameObject.cpp
-  Heap.cpp
-c:\users\d012120g\documents\low-level-programming\heap\heap\heap.cpp(5): error C2440: 'initializing': cannot convert from 'const char [1]' to 'char *'
-  c:\users\d012120g\documents\low-level-programming\heap\heap\heap.cpp(5): note: Conversion from string literal loses const qualifier (see /Zc:strictStrings)
-c:\users\d012120g\documents\low-level-programming\heap\heap\heap.cpp(5): error C2439: 'Heap::m_name': member could not be initialized
-  c:\users\d012120g\documents\low-level-programming\heap\heap\heap.h(6): note: see declaration of 'Heap::m_name'
-c:\users\d012120g\documents\low-level-programming\heap\heap\heap.cpp(7): error C2511: 'Heap::Heap(char *)': overloaded member function not found in 'Heap'
-  c:\users\d012120g\documents\low-level-programming\heap\heap\heap.h(4): note: see declaration of 'Heap'
-c:\users\d012120g\documents\low-level-programming\heap\heap\heap.cpp(7): error C2550: 'Heap::{ctor}': constructor initializer lists are only allowed on constructor definitions
-  HeapFactory.cpp
-  Main.cpp
-c:\users\d012120g\documents\low-level-programming\heap\heap\main.cpp(15): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  MemoryPool.cpp
   Structures.cpp
-  Vector3D.cpp
   Generating Code...
+  Heap.vcxproj -> C:\Users\d012120g\Documents\Low-Level-Programming\Heap\x64\Debug\Heap.exe

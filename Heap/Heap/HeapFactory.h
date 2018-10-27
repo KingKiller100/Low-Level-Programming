@@ -5,7 +5,7 @@
 class HeapFactory
 {
 private:
-	static Heap *defaultHeap;
+	static Heap *_defaultHeap;
 	static std::vector<Heap*> heapContainer;
 public:
 	HeapFactory();

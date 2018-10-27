@@ -3,11 +3,12 @@
 #include "Structures.h"
 #include <iostream>
 
-Heap *GameObject::s_pHeap = nullptr;
+Heap *GameObject::go_pHeap = nullptr;
 int GameObject::count = 0;
 
 GameObject::GameObject(int id) : m_id(id) 
 {
+	int* x = new (go_pHeap) int;
 	std::cout << "GameObject Constructor Called" << std::endl;
 }
 
@@ -18,8 +19,8 @@ GameObject::~GameObject()
 
 void * GameObject::operator new(size_t size)
 {
-	if (s_pHeap == nullptr)
-		s_pHeap = HeapFactory::CreateHeap("Game Object" + count);
+	if (go_pHeap == nullptr)
+		go_pHeap = HeapFactory::CreateHeap("Game Object" + count);
 
 	count++;
 

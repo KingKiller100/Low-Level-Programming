@@ -3,8 +3,11 @@
 
 struct AllocHeader
 {
-	Heap* pHeap;
+	int iSignature;
+	Heap *pHeap;
 	int iSize;
+	AllocHeader *_next;
+	AllocHeader *_prev;
 };
 
 class MemoryManagement
