@@ -2,9 +2,9 @@
 #include "Heap.h"
 #include <iostream>
 
-Heap::Heap() : m_name((char*)" "), m_allocatedBytes(0) {}
+Heap::Heap() : m_name((char*)""), m_allocatedBytes(0) {}
 
-Heap::Heap(const char *name) : m_name((char*)name), m_allocatedBytes(0) {}
+Heap::Heap(char *name) : m_name((char*)name), m_allocatedBytes(0) {}
 
 void Heap::AddAllocation(size_t size)
 {

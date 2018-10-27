@@ -4,8 +4,12 @@
 #include <iostream>
 
 Heap *GameObject::s_pHeap = nullptr;
+int GameObject::count = 0;
 
-GameObject::GameObject(int id) : m_id(id) {}
+GameObject::GameObject(int id) : m_id(id) 
+{
+	std::cout << "GameObject Constructor Called" << std::endl;
+}
 
 GameObject::~GameObject()
 {
@@ -15,7 +19,9 @@ GameObject::~GameObject()
 void * GameObject::operator new(size_t size)
 {
 	if (s_pHeap == nullptr)
-		s_pHeap = HeapFactory::CreateHeap("Game Object");
+		s_pHeap = HeapFactory::CreateHeap("Game Object" + count);
+
+	count++;
 
 	return MemoryManagement::operator new(sizeof(GameObject));
 }
