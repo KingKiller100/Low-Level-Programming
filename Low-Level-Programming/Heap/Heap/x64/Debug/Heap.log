@@ -1,0 +1,16 @@
+﻿  GameObject.cpp
+  Main.cpp
+c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\memoryoverride.h(13): error C2039: 'Heap': is not a member of 'Vector3D'
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\vector3d.h(5): note: see declaration of 'Vector3D'
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\memoryoverride.h(12): note: while compiling class template member function 'void *MemoryOverride<Vector3D>::operator new(size_t)'
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\main.cpp(17): note: see reference to function template instantiation 'void *MemoryOverride<Vector3D>::operator new(size_t)' being compiled
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\vector3d.h(6): note: see reference to class template instantiation 'MemoryOverride<Vector3D>' being compiled
+c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\memoryoverride.h(13): error C2059: syntax error: ')'
+c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\memoryoverride.h(14): error C2039: 'Heap': is not a member of 'Vector3D'
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\vector3d.h(5): note: see declaration of 'Vector3D'
+c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\memoryoverride.h(16): error C2039: 'Heap': is not a member of 'Vector3D'
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\vector3d.h(5): note: see declaration of 'Vector3D'
+c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\memoryoverride.h(16): error C2275: 'Heap': illegal use of this type as an expression
+  c:\users\d012120g\documents\low-level-programming-master\low-level-programming-master\heap\heap\heap.h(5): note: see declaration of 'Heap'
+  Vector3D.cpp
+  Generating Code...
