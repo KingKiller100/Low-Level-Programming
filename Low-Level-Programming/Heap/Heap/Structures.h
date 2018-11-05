@@ -50,7 +50,7 @@ public:
 
 		assert(sig == MEMSYSTEM_SIGNATURE);
 
-		int *pEndMarker = (int*)(int*)((char*)pMem + size);
+		auto *pEndMarker = (int*)(int*)((char*)pMem + size);
 
 		assert(*pEndMarker == MEMSYSTEM_ENDMARKER);
 

@@ -3,17 +3,20 @@
 #include <iostream>
 
 Heap::Heap() : m_name(""), m_allocatedBytes(0) 
-{
-}
+{}
 
 Heap::Heap(const std::string name) : m_name(name), m_allocatedBytes(0)
-{
-}
+{}
 
 void Heap::Initialise(const std::string n)
 {
 	m_name = n;
 	m_allocatedBytes = 0;
+}
+
+void Heap::SetName(std::string n)
+{	
+	m_name = (char*)n.c_str();
 }
 
 void Heap::AddAllocation(size_t size)

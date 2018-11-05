@@ -8,8 +8,8 @@ private:
 	double x;
 	double y;
 	double z;
-	static Heap* v_Heap;
 public:
+	static Heap* Heap;
 	Vector3D();
 	Vector3D(const double &x, const double &y, const double &z);
 	~Vector3D();

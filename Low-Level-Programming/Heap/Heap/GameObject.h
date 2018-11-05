@@ -6,7 +6,7 @@ class GameObject : public MemoryOverride<GameObject>
 {
 private:
 	int m_id;
-	static Heap* g_Heap;
+	static Heap* Heap;
 public:
 	GameObject();
 	GameObject(int id);

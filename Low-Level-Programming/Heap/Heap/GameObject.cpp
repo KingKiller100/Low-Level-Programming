@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include <iostream>
 
-Heap *GameObject::g_Heap = nullptr;
+Heap *GameObject::Heap = nullptr;
 
 GameObject::GameObject()
 {

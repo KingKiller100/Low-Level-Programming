@@ -10,7 +10,7 @@ class MemoryOverride
 public:
 	void * operator new(size_t size)
 	{
-		if (X::Heap)
+		if (!X::Heap)
 			X::Heap = HeapFactory::CreateHeap(typeid(X).name());
 
 		return MemManagement::operator new(size, X::Heap);

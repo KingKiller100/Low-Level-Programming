@@ -1,5 +1,7 @@
 #pragma once
+#include <cstdio>
 #include <string>
+
 
 class Heap
 {
@@ -10,15 +12,18 @@ public:
 
 public:
 	Heap();
-	Heap(const std::string nname);
+	Heap(std::string name);
 
-	void Initialise(const std::string n);
+	void Initialise(std::string n);
 
-	void SetName(const char *n)					{ m_name = (char*)n; }
-	std::string GetName() const					{ return m_name; };
+	void SetName(std::string n);
+	
+	
+
+	std::string GetName() const							{ return m_name; };
 	
 	void AddAllocation(size_t size);
 	void RemoveAllocation(size_t size);
-	size_t TotalAllocation() const				{ return m_allocatedBytes; }
+	size_t TotalAllocation() const						{ return m_allocatedBytes; }
 };
 

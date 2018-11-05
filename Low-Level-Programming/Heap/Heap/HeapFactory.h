@@ -11,7 +11,7 @@ public:
 	HeapFactory();
 	~HeapFactory();
 
-	static Heap *CreateHeap(const char *szName);
+	static Heap *CreateHeap(std::string szName);
 	static Heap* GetDefaultHeap();
 };
 
