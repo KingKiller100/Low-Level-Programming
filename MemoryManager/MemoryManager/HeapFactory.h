@@ -13,5 +13,7 @@ public:
 
 	static Heap *CreateHeap(std::string szName);
 	static Heap* GetDefaultHeap();
+
+	static void WalkHeap(int id);
 };
 

@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include <iostream>
 
-Heap *GameObject::Heap = nullptr;
+Heap *GameObject::heap = nullptr;
 
 GameObject::GameObject()
 {
@@ -18,3 +18,13 @@ GameObject::~GameObject()
 {
 	std::cout << "GameObject Destructor Called" << std::endl;
 }
+
+void GameObject::Update()
+{
+	int* x = (int*)MemManagement::operator new(sizeof(int), heap);
+
+	std::cin.get();
+
+	MemManagement::operator delete(x);
+}
+

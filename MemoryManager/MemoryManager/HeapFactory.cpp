@@ -1,7 +1,6 @@
- 
 #include "HeapFactory.h"
-#include <utility>
 #include <iostream>
+
 Heap* HeapFactory::_defaultHeap = nullptr;
 std::vector<Heap*> HeapFactory::heapContainer;
 
@@ -17,9 +16,7 @@ Heap * HeapFactory::CreateHeap(std::string szName)
 	std::cout << "Creating Heap " << szName << "\n" << std::endl;
 	
 	Heap* newHeap = new Heap(szName);
-
-	heapContainer.push_back(newHeap);
-	
+	heapContainer.push_back(newHeap);	
 	return newHeap;
 }
 
@@ -31,8 +28,16 @@ Heap* HeapFactory::GetDefaultHeap()
 		return _defaultHeap;
 
 	_defaultHeap = (Heap*)malloc(sizeof(Heap));
-	_defaultHeap->SetName("default");
-	_defaultHeap->m_allocatedBytes = 0;
+	_defaultHeap->Initialise("default");
+	heapContainer.emplace_back(_defaultHeap);
 
 	return _defaultHeap;
+}
+
+void HeapFactory::WalkHeap(int id)
+{
+	if (heapContainer.at(id)->_previousAddress)
+	{
+		
+	}
 }

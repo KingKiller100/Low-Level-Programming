@@ -7,8 +7,10 @@ class Heap
 {
 private:
 	std::string m_name;
+
 public:
 	size_t m_allocatedBytes;
+	void *_previousAddress;
 
 public:
 	Heap();
@@ -16,10 +18,7 @@ public:
 
 	void Initialise(std::string n);
 
-	void SetName(std::string n);
-	
-	
-
+	void SetName(std::string n)							{ m_name = (char*)n.c_str();	}
 	std::string GetName() const							{ return m_name; };
 	
 	void AddAllocation(size_t size);

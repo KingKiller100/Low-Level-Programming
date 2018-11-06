@@ -6,12 +6,12 @@ class GameObject : public MemoryOverride<GameObject>
 {
 private:
 	int m_id;
+
 public:
-	static Heap* Heap;
+	static Heap* heap;
 	GameObject();
 	GameObject(int id);
 	~GameObject();
 
-	/*void* operator new(size_t size);
-	void operator delete (void *pMem, size_t size);*/
+	void Update();
 };

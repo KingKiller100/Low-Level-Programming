@@ -2,21 +2,17 @@
 #include "Heap.h"
 #include <iostream>
 
-Heap::Heap() : m_name(""), m_allocatedBytes(0) 
+Heap::Heap() : m_name(""), m_allocatedBytes(0), _previousAddress(nullptr)
 {}
 
-Heap::Heap(const std::string name) : m_name(name), m_allocatedBytes(0)
+Heap::Heap(std::string name) : m_name(name), m_allocatedBytes(0), _previousAddress(nullptr)
 {}
 
-void Heap::Initialise(const std::string n)
+void Heap::Initialise(std::string n)
 {
 	m_name = (char*)n.c_str();
 	m_allocatedBytes = 0;
-}
-
-void Heap::SetName(std::string n)
-{	
-	m_name = (char*)n.c_str();
+	_previousAddress = nullptr;
 }
 
 void Heap::AddAllocation(size_t size)
@@ -32,5 +28,5 @@ void Heap::RemoveAllocation(size_t size)
 
 	m_allocatedBytes -= size;
 
-	std::cout << GetName() << ": " << m_allocatedBytes << " bytes left after deletion!" << std::endl;
+	std::cout << GetName() << ": " << m_allocatedBytes << " bytes left after deletion!\n" << std::endl;
 }

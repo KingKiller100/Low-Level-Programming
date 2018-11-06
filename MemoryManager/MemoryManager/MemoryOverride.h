@@ -9,10 +9,10 @@ class MemoryOverride
 public:
 	void * operator new(size_t size)
 	{
-		if (!X::Heap)
-			X::Heap = HeapFactory::CreateHeap(typeid(X).name());
+		if (!X::heap)
+			X::heap = HeapFactory::CreateHeap(typeid(X).name());
 
-		return MemManagement::operator new(size, X::Heap);
+		return MemManagement::operator new(size, X::heap);
 	}
 
 	void operator delete(void *pMem, size_t size)
