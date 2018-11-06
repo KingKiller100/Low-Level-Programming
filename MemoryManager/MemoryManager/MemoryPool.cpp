@@ -1,4 +1,4 @@
- 
+  
 #include "MemoryPool.h"
 
 
@@ -13,9 +13,10 @@ MemoryPool::~MemoryPool()
 
 void * MemoryPool::Alloc(size_t iSize)
 {
-	return nullptr;
+	return MemManagement::operator new(iSize);
 }
 
-void MemoryPool::Free(void * p, size_t i_size)
+void MemoryPool::Free(void * pMem, size_t i_size)
 {
+	MemManagement::operator delete(pMem);
 }

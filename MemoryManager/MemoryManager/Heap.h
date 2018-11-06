@@ -24,5 +24,8 @@ public:
 	void AddAllocation(size_t size);
 	void RemoveAllocation(size_t size);
 	size_t TotalAllocation() const						{ return m_allocatedBytes; }
+
+	void WalkHeap(int id);
+
 };
 

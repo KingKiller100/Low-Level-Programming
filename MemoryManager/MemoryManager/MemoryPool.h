@@ -1,4 +1,7 @@
 #pragma once
+#include "Structures.h"
+
+
 class MemoryPool
 {
 public:

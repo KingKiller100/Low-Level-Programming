@@ -27,8 +27,10 @@ Heap* HeapFactory::GetDefaultHeap()
 	if (_defaultHeap)
 		return _defaultHeap;
 
-	_defaultHeap = (Heap*)malloc(sizeof(Heap));
-	_defaultHeap->Initialise("default");
+	//_defaultHeap = (Heap*)malloc(sizeof(Heap));
+	_defaultHeap = new Heap("Default");
+
+	//_defaultHeap->Initialise("default");
 	heapContainer.emplace_back(_defaultHeap);
 
 	return _defaultHeap;
@@ -36,8 +38,8 @@ Heap* HeapFactory::GetDefaultHeap()
 
 void HeapFactory::WalkHeap(int id)
 {
-	if (heapContainer.at(id)->_previousAddress)
+	if (heapContainer.at(id))
 	{
-		
+		heapContainer.at(id)->WalkHeap(id);
 	}
 }
