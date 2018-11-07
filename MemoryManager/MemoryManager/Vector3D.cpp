@@ -17,5 +17,5 @@ Vector3D::Vector3D(const double & x, const double & y, const double & z) : x(x),
 
 Vector3D::~Vector3D()
 {
-	std::cout << "V3D Destroyed" << std::endl;
+	std::cout << "V3D Destroyed\n" << std::endl;
 }

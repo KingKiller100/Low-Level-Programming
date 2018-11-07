@@ -13,8 +13,5 @@ public:
 	Vector3D();
 	Vector3D(const double &x, const double &y, const double &z);
 	~Vector3D();
-
-	//static void *operator new(size_t size);
-	//static void operator delete (void *pMem, size_t size);
 };
 

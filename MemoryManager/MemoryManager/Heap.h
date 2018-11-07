@@ -1,12 +1,14 @@
 #pragma once
 #include <cstdio>
-#include <string>
 
+
+#define MEMSYSTEM_SIGNATURE 0xdeadc0de //233495774
+#define MEMSYSTEM_ENDMARKER 0xdeadbeef //218815710
 
 class Heap
 {
 private:
-	std::string m_name;
+	char* m_name;
 
 public:
 	size_t m_allocatedBytes;
@@ -14,18 +16,27 @@ public:
 
 public:
 	Heap();
-	Heap(std::string name);
+	Heap(char* name);
 
-	void Initialise(std::string n);
+	void Initialise(const char* n);
 
-	void SetName(std::string n)							{ m_name = (char*)n.c_str();	}
-	std::string GetName() const							{ return m_name; };
+	void SetName(char* n)							{ m_name = n; }
+	char* GetName() const							{ return m_name; };
 	
 	void AddAllocation(size_t size);
 	void RemoveAllocation(size_t size);
-	size_t TotalAllocation() const						{ return m_allocatedBytes; }
+	size_t TotalAllocation() const					{ return m_allocatedBytes; }
 
-	void WalkHeap(int id);
+	void WalkHeap();
 
+};
+
+struct AllocHeader
+{
+	int iSignature;
+	Heap *pHeap;
+	int iSize;
+	AllocHeader *_next;
+	AllocHeader *_prev;
 };
 

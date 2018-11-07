@@ -1,7 +1,6 @@
 #pragma once
 #include "Heap.h"
 #include <vector>
-#include "Structures.h"
 
 class HeapFactory
 {
@@ -12,7 +11,7 @@ public:
 	HeapFactory();
 	~HeapFactory();
 
-	static Heap *CreateHeap(std::string szName);
+	static Heap *CreateHeap(const char * szName);
 	static Heap* GetDefaultHeap();
 
 	static void WalkHeap(int id);

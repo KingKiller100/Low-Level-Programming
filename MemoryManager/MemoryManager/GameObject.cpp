@@ -16,7 +16,7 @@ GameObject::GameObject(int id) : m_id(id)
 
 GameObject::~GameObject()
 {
-	std::cout << "GameObject Destructor Called" << std::endl;
+	std::cout << "GameObject Destructor Called\n" << std::endl;
 }
 
 void GameObject::Update()

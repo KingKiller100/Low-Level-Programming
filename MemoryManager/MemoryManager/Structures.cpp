@@ -1,6 +1,5 @@
 #include "Structures.h"
 
-
 void * operator new(size_t size, Heap * pHeap)
 {
 	size_t iRequestedBytes = size + sizeof(AllocHeader) + sizeof(int);
@@ -25,17 +24,17 @@ void * operator new(size_t size, Heap * pHeap)
 	}
 
 	auto *pStartMemBlock = pMem + sizeof(AllocHeader);
-	int *pEndMarker = (int*)(pStartMemBlock + size);
+	int *pEndMarker = (int*)((char*)pStartMemBlock + size);
 	*pEndMarker = MEMSYSTEM_ENDMARKER;
 
-	pHeap->AddAllocation(size);
+	pHeap->AddAllocation(iRequestedBytes);
 
 	return pStartMemBlock;
 }
 
 void * operator new(size_t size)
 {
-	return operator new(size, HeapFactory::GetDefaultHeap());
+ 	return operator new(size, HeapFactory::GetDefaultHeap());
 }
 
 void operator delete(void * pMem)
@@ -59,10 +58,10 @@ void operator delete(void * pMem)
 	if (!prev && !next)
 		heap->_previousAddress = nullptr;
 
-	auto *pEndMarker = (int*)(int*)((char*)pMem + size);
+	auto *pEndMarker = (int*)((char*)pMem + size);
 
 	assert(*pEndMarker == MEMSYSTEM_ENDMARKER);
 
-	heap->RemoveAllocation(size);
+	heap->RemoveAllocation(size + sizeof(AllocHeader) + sizeof(int));
 	free(pHeader);
 }
