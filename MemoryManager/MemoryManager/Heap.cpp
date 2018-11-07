@@ -10,7 +10,7 @@ Heap::Heap(std::string name) : m_name(name), m_allocatedBytes(0), _previousAddre
 
 void Heap::Initialise(std::string n)
 {
-	m_name = (char*)n.c_str();
+	m_name = n;
 	m_allocatedBytes = 0;
 	_previousAddress = nullptr;
 }
@@ -41,7 +41,7 @@ void Heap::WalkHeap(int id)
 		copyHeap->_previousAddress = _previousAddress;
 		totalBytes += m_allocatedBytes;
 
-		while (!copyHeap->_previousAddress)
+		while (copyHeap->_previousAddress)
 		{
 			totalBytes += m_allocatedBytes;
 
@@ -51,5 +51,5 @@ void Heap::WalkHeap(int id)
 	else
 		totalBytes += m_allocatedBytes;
 
-	std::cout << "total bytes: " << totalBytes << std::endl;
+	std::cout << GetName() << " total bytes: " << totalBytes << std::endl;
 }

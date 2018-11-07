@@ -120,6 +120,7 @@
     <ClCompile Include="HeapFactory.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryPool.cpp" />
+    <ClCompile Include="Structures.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>

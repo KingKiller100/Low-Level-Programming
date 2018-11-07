@@ -27,10 +27,10 @@ Heap* HeapFactory::GetDefaultHeap()
 	if (_defaultHeap)
 		return _defaultHeap;
 
-	//_defaultHeap = (Heap*)malloc(sizeof(Heap));
-	_defaultHeap = new Heap("Default");
+	_defaultHeap = (Heap*)malloc(sizeof(Heap("default")));
+	//_defaultHeap = new Heap("Default");
 
-	//_defaultHeap->Initialise("default");
+	_defaultHeap->Initialise("default");
 	heapContainer.emplace_back(_defaultHeap);
 
 	return _defaultHeap;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Heap.h"
 #include <vector>
+#include "Structures.h"
 
 class HeapFactory
 {

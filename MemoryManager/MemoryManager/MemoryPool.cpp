@@ -13,10 +13,10 @@ MemoryPool::~MemoryPool()
 
 void * MemoryPool::Alloc(size_t iSize)
 {
-	return MemManagement::operator new(iSize);
+	return ::operator new(iSize);
 }
 
 void MemoryPool::Free(void * pMem, size_t i_size)
 {
-	MemManagement::operator delete(pMem);
+	::operator delete(pMem);
 }

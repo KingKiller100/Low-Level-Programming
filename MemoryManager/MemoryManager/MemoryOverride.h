@@ -12,12 +12,12 @@ public:
 		if (!X::heap)
 			X::heap = HeapFactory::CreateHeap(typeid(X).name());
 
-		return MemManagement::operator new(size, X::heap);
+		return ::operator new(size, X::heap);
 	}
 
 	void operator delete(void *pMem, size_t size)
 	{
-		MemManagement::operator delete(pMem);
+		::operator delete(pMem);
 	}
 };
 

@@ -21,10 +21,10 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	int* x = (int*)MemManagement::operator new(sizeof(int), heap);
+	int* x = (int*) ::operator new(sizeof(int), heap);
 
 	std::cin.get();
 
-	MemManagement::operator delete(x);
+	::operator delete(x);
 }
 
