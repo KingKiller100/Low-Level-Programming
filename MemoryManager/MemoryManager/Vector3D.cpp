@@ -1,7 +1,7 @@
 #include "Vector3D.h"
 #include <iostream>
 
-Heap *Vector3D::heap = nullptr;
+Heap *Vector3D::_heap = nullptr;
 
 Vector3D::Vector3D()
 {

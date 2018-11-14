@@ -2,17 +2,17 @@
 #include <iostream>
 #include <cassert>
 
-Heap::Heap() : m_name((char*)""), m_allocatedBytes(0), _previousAddress(nullptr)
+Heap::Heap() : m_name((char*)""), m_allocatedBytes(0), _prevAddress(nullptr)
 {}
 
-Heap::Heap(char* name) : m_name((char*)name), m_allocatedBytes(0), _previousAddress(nullptr)
+Heap::Heap(char* name) : m_name((char*)name), m_allocatedBytes(0), _prevAddress(nullptr)
 {}
 
 void Heap::Initialise(const char* n)
 {
 	m_name = (char*)n;
 	m_allocatedBytes = 0;
-	_previousAddress = nullptr;
+	_prevAddress = nullptr;
 }
 
 void Heap::AddAllocation(size_t size)
@@ -21,7 +21,7 @@ void Heap::AddAllocation(size_t size)
 
 	m_allocatedBytes += size;
 
-	std::cout << m_name << ": " << m_allocatedBytes << " bytes allocated!" << std::endl;
+	std::cout << m_name << ": " << m_allocatedBytes << " bytes allocated!\n" << std::endl;
 }
 
 void Heap::RemoveAllocation(size_t size)
@@ -36,48 +36,49 @@ void Heap::RemoveAllocation(size_t size)
 
 void Heap::WalkHeap()
 {
-	int a = 0;
 	AllocHeader* copyHeap;
 	size_t totalBytes = 0;
 
-	
-	if (_previousAddress)
-	{
-		copyHeap = ((AllocHeader*)_previousAddress);
 
-		if (copyHeap->_prev != (AllocHeader*)0xdddddddd)
+	if (_prevAddress)
+	{
+		copyHeap = (AllocHeader*)_prevAddress;
+
+		if (copyHeap->_prev != nullptr)
 		{
-			while (copyHeap->_prev)
+			while (copyHeap->_prev && copyHeap != copyHeap->_prev)
 			{
 				copyHeap = copyHeap->_prev;
 			}
 
+			size_t requestedBytes = copyHeap->iSize + sizeof(AllocHeader) + sizeof(int);
+			std::cout << copyHeap->pHeap->GetName() << " size of each class allocated on the heap: " << requestedBytes <<  std::endl;
+
 			while (true)
 			{
-				size_t requestedBytes = copyHeap->iSize + sizeof(AllocHeader) + sizeof(int);
-
 				assert(copyHeap->iSignature == MEMSYSTEM_SIGNATURE);
-
-				char *pMem = (char*)malloc(requestedBytes);
-				//auto *pEndMem = (int*)(((char*)pMem + copyHeap->iSize) + sizeof(AllocHeader));
 
 				auto *pEndMem = (int*)(int*)((char*)copyHeap + copyHeap->iSize + sizeof(AllocHeader));
 
 				assert(*pEndMem == MEMSYSTEM_ENDMARKER);
 
-
-				std::cout << copyHeap->pHeap->GetName() << " total bytes: " << requestedBytes << "\n" << std::endl;
+				if (!copyHeap->_next || copyHeap == copyHeap->_next)
+					break;
 
 				copyHeap = copyHeap->_next;
-
-				if (!copyHeap->_next)
-					break;
 			}
 
 			totalBytes += m_allocatedBytes;
 		}
 		else
-			return;
+		{
+			size_t requestedBytes = m_allocatedBytes + sizeof(AllocHeader) + sizeof(int);
+
+			std::cout << GetName() << " size of each class allocated on the heap (including allocheader): " << requestedBytes  << std::endl;
+
+			totalBytes += m_allocatedBytes;
+		}
 	}
-	std::cout << m_name << " total bytes: " << totalBytes << "\n" << std::endl;
+
+	std::cout << m_name << " total bytes allocated on this heap: " << totalBytes << "\n" << std::endl;
 }

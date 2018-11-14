@@ -8,19 +8,17 @@ void * operator new(size_t size, Heap * pHeap)
 	pHeader->iSignature = MEMSYSTEM_SIGNATURE;
 	pHeader->pHeap = pHeap;
 	pHeader->iSize = (int)size;
+	
+	pHeader->_prev = pHeader->_next = nullptr;
+	pHeader->pHeap->_prevAddress = pHeader; //Points at itself
 
-	if (!pHeader->pHeap->_previousAddress)
-	{
-		pHeader->_prev = pHeader->_next = nullptr;
-		pHeader->pHeap->_previousAddress = pHeader;
-	}
-	else
+	if (pHeader->pHeap->_prevAddress)
 	{
 		pHeader->_next = nullptr;
-		AllocHeader* copy = (AllocHeader*)pHeader->pHeap->_previousAddress;
+		AllocHeader* copy = (AllocHeader*)pHeader->pHeap->_prevAddress;
 		pHeader->_prev = copy;
 		copy->_next = pHeader;
-		pHeader->pHeap->_previousAddress = pHeader;
+		pHeader->pHeap->_prevAddress = pHeader;
 	}
 
 	auto *pStartMemBlock = pMem + sizeof(AllocHeader);
@@ -56,7 +54,7 @@ void operator delete(void * pMem)
 		prev->_next = next;
 
 	if (!prev && !next)
-		heap->_previousAddress = nullptr;
+		heap->_prevAddress = nullptr;
 
 	auto *pEndMarker = (int*)((char*)pMem + size);
 

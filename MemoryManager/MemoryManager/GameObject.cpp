@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include <iostream>
 
-Heap *GameObject::heap = nullptr;
+Heap *GameObject::_heap = nullptr;
 
 GameObject::GameObject()
 {
@@ -21,7 +21,7 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	int* x = (int*) ::operator new(sizeof(int), heap);
+	int* x = (int*) ::operator new(sizeof(int), _heap);
 
 	std::cin.get();
 

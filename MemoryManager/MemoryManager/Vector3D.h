@@ -9,7 +9,7 @@ private:
 	double y;
 	double z;
 public:
-	static Heap* heap;
+	static Heap* _heap;
 	Vector3D();
 	Vector3D(const double &x, const double &y, const double &z);
 	~Vector3D();

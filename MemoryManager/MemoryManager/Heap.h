@@ -12,7 +12,7 @@ private:
 
 public:
 	size_t m_allocatedBytes;
-	void *_previousAddress;
+	void *_prevAddress;
 
 public:
 	Heap();

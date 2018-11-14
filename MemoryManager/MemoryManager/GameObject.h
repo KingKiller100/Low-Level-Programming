@@ -8,9 +8,10 @@ private:
 	int m_id;
 
 public:
-	static Heap* heap;
+	static Heap* _heap;
 	GameObject();
 	GameObject(int id);
+
 	~GameObject();
 
 	void Update();
