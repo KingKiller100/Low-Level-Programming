@@ -10,7 +10,7 @@ void * operator new(size_t size, Heap * pHeap)
 	pHeader->iSize = (int)size;
 	
 	pHeader->_prev = pHeader->_next = nullptr;
-	pHeader->pHeap->_prevAddress = pHeader; //Points at itself
+	//pHeader->pHeap->_prevAddress = nullptr; //Points at itself
 
 	if (pHeader->pHeap->_prevAddress)
 	{
@@ -18,6 +18,13 @@ void * operator new(size_t size, Heap * pHeap)
 		AllocHeader* copy = (AllocHeader*)pHeader->pHeap->_prevAddress;
 		pHeader->_prev = copy;
 		copy->_next = pHeader;
+		pHeader->pHeap->_prevAddress = pHeader;
+	}
+	else
+	{
+		pHeader->_next = nullptr;
+		AllocHeader* copy = (AllocHeader*)pHeader->pHeap->_prevAddress;
+		pHeader->_prev = copy;
 		pHeader->pHeap->_prevAddress = pHeader;
 	}
 
