@@ -39,7 +39,6 @@ void Heap::WalkHeap()
 	AllocHeader* copyHeap;
 	size_t totalBytes = 0;
 
-
 	if (_prevAddress)
 	{
 		copyHeap = (AllocHeader*)_prevAddress;
@@ -52,7 +51,9 @@ void Heap::WalkHeap()
 			}
 
 			size_t requestedBytes = copyHeap->iSize + sizeof(AllocHeader) + sizeof(int);
-			std::cout << copyHeap->pHeap->GetName() << " size of each class allocated on the heap: " << requestedBytes <<  std::endl;
+			
+			if (m_name != (char*)"default")
+				std::cout << copyHeap->pHeap->GetName() << " size for each class allocated on the heap (including AllocHeader): " << requestedBytes <<  std::endl;
 
 			while (true)
 			{
@@ -66,19 +67,20 @@ void Heap::WalkHeap()
 					break;
 
 				copyHeap = copyHeap->_next;
+				totalBytes += m_allocatedBytes;
 			}
 
-			totalBytes += m_allocatedBytes;
 		}
 		else
 		{
 			size_t requestedBytes = m_allocatedBytes + sizeof(AllocHeader) + sizeof(int);
 
-			std::cout << GetName() << " size of each class allocated on the heap (including allocheader): " << requestedBytes  << std::endl;
+			if (m_name != (char*)"default")
+				std::cout << GetName() << " size for each class allocated on the heap (including AllocHeader): " << requestedBytes  << std::endl;
 
 			totalBytes += m_allocatedBytes;
 		}
 	}
 
-	std::cout << m_name << " total bytes allocated on this heap: " << totalBytes << "\n" << std::endl;
+		std::cout << m_name << " heap's total bytes allocated on this heap: " << totalBytes << "\n" << std::endl;
 }

@@ -1,6 +1,6 @@
   
+#include "Heap.h"
 #include "MemoryPool.h"
-#include <unordered_map>
 
 MemoryPool::MemoryPool(size_t iObjectsize)
 {
@@ -14,7 +14,7 @@ MemoryPool::~MemoryPool()
 
 void * MemoryPool::Alloc(size_t iSize)
 {
-	return ::operator new(iSize);
+	return nullptr;
 }
 
 void MemoryPool::Free(void * pMem, size_t i_size)

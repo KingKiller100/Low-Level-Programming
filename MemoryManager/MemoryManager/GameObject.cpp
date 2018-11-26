@@ -21,10 +21,11 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	int* x = (int*) ::operator new(sizeof(int), _heap);
+	const unsigned char* x	= new(_heap) unsigned char();
+	const unsigned char* x2 = new(_heap) unsigned char();
+	const unsigned char* x3 = new(_heap) unsigned char();
 
-	std::cin.get();
-
-	::operator delete(x);
+	//delete x;
+	//delete x2;
+	//delete x3;
 }
-

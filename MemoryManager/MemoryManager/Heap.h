@@ -1,7 +1,6 @@
 #pragma once
 #include <cstdio>
 
-
 #define MEMSYSTEM_SIGNATURE 0xdeadc0de //233495774
 #define MEMSYSTEM_ENDMARKER 0xdeadbeef //218815710
 
@@ -36,7 +35,7 @@ struct AllocHeader
 	int iSignature;
 	Heap *pHeap;
 	int iSize;
-	AllocHeader *_next;
 	AllocHeader *_prev;
+	AllocHeader *_next;
 };
 

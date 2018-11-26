@@ -19,3 +19,16 @@ Vector3D::~Vector3D()
 {
 	std::cout << "V3D Destroyed\n" << std::endl;
 }
+
+void Vector3D::Update()
+{
+	const unsigned char *it		= new (_heap) unsigned char();
+	const unsigned char *it1	= new (_heap) unsigned char();
+	const unsigned char *it2	= new (_heap) unsigned char();
+	const unsigned char *it3	= new (_heap) unsigned char();
+
+/*	delete it;
+	delete it1;
+	delete it2;
+	delete it3*/;
+}
