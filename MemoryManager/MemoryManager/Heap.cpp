@@ -42,45 +42,49 @@ void Heap::WalkHeap()
 	if (_prevAddress)
 	{
 		copyHeap = (AllocHeader*)_prevAddress;
-
-		if (copyHeap->_prev != nullptr)
+		
+		if (copyHeap)
 		{
-			while (copyHeap->_prev && copyHeap != copyHeap->_prev)
+
+			if (copyHeap->_prev != nullptr)
 			{
-				copyHeap = copyHeap->_prev;
+				while (copyHeap->_prev && copyHeap != copyHeap->_prev)
+				{
+					copyHeap = copyHeap->_prev;
+				}
+
+				size_t requestedBytes = copyHeap->iSize + sizeof(AllocHeader) + sizeof(int);
+
+				if (m_name != (char*)"default")
+					std::cout << copyHeap->pHeap->GetName() << " size for each class allocated on the heap (including AllocHeader): " << requestedBytes << std::endl;
+
+				while (true)
+				{
+					assert(copyHeap->iSignature == MEMSYSTEM_SIGNATURE);
+
+					auto *pEndMem = (int*)(int*)((char*)copyHeap + copyHeap->iSize + sizeof(AllocHeader));
+
+					assert(*pEndMem == MEMSYSTEM_ENDMARKER);
+
+					if (!copyHeap->_next || copyHeap == copyHeap->_next)
+						break;
+
+					copyHeap = copyHeap->_next;
+					totalBytes += m_allocatedBytes;
+				}
+
 			}
-
-			size_t requestedBytes = copyHeap->iSize + sizeof(AllocHeader) + sizeof(int);
-			
-			if (m_name != (char*)"default")
-				std::cout << copyHeap->pHeap->GetName() << " size for each class allocated on the heap (including AllocHeader): " << requestedBytes <<  std::endl;
-
-			while (true)
+			else
 			{
-				assert(copyHeap->iSignature == MEMSYSTEM_SIGNATURE);
+				size_t requestedBytes = m_allocatedBytes + sizeof(AllocHeader) + sizeof(int);
 
-				auto *pEndMem = (int*)(int*)((char*)copyHeap + copyHeap->iSize + sizeof(AllocHeader));
+				if (m_name != (char*)"default")
+					std::cout << GetName() << " size for each class allocated on the heap (including AllocHeader): " << requestedBytes << std::endl;
 
-				assert(*pEndMem == MEMSYSTEM_ENDMARKER);
-
-				if (!copyHeap->_next || copyHeap == copyHeap->_next)
-					break;
-
-				copyHeap = copyHeap->_next;
 				totalBytes += m_allocatedBytes;
 			}
-
-		}
-		else
-		{
-			size_t requestedBytes = m_allocatedBytes + sizeof(AllocHeader) + sizeof(int);
-
-			if (m_name != (char*)"default")
-				std::cout << GetName() << " size for each class allocated on the heap (including AllocHeader): " << requestedBytes  << std::endl;
-
-			totalBytes += m_allocatedBytes;
 		}
 	}
-
-		std::cout << m_name << " heap's total bytes allocated on this heap: " << totalBytes << "\n" << std::endl;
+	
+	std::cout << m_name << " heap's total bytes allocated on this heap: " << totalBytes << "\n" << std::endl;
 }

@@ -27,8 +27,8 @@ void Vector3D::Update()
 	const unsigned char *it2	= new (_heap) unsigned char();
 	const unsigned char *it3	= new (_heap) unsigned char();
 
-/*	delete it;
+	delete it;
 	delete it1;
 	delete it2;
-	delete it3*/;
+	delete it3;
 }

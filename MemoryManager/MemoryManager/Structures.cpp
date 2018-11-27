@@ -55,24 +55,20 @@ void operator delete(void * pMem)
 	auto prev = pHeader->_prev;
 
 	assert(sig == MEMSYSTEM_SIGNATURE);
-
-	if (next)
-	{
+	
+	if (next)	
 		next->_prev = prev;
-		heap->_prevAddress = next->pHeap->_prevAddress;
-	}
 
-	if (prev)
-	{
+
+	if (prev)	
 		prev->_next = next;
-		
-		if(!next)
-			heap->_prevAddress = prev->pHeap->_prevAddress;
-	}
+			
 
 	if (!prev && !next)
 		heap->_prevAddress = nullptr;
 
+	if (!next)
+		heap->_prevAddress = prev;
 
 	auto *pEndMarker = static_cast<int*>(reinterpret_cast<int*>(static_cast<char*>(pMem) + size));
 
@@ -80,6 +76,4 @@ void operator delete(void * pMem)
 
 	heap->RemoveAllocation(size + sizeof(AllocHeader) + sizeof(int));
 	free(pHeader);
-
-	std::cin.get();
 }

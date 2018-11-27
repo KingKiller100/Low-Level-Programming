@@ -25,7 +25,10 @@ void GameObject::Update()
 	const unsigned char* x2 = new(_heap) unsigned char();
 	const unsigned char* x3 = new(_heap) unsigned char();
 
-	//delete x;
-	//delete x2;
-	//delete x3;
+	delete x;
+	delete x2;
+	delete x3;
+
+	std::cout << "prev:" << &((AllocHeader*)this)->_prev << std::endl;
+	std::cout << "next: " << &((AllocHeader*)this)->_next << "\n";
 }
