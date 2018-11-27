@@ -1,7 +1,9 @@
 #pragma once
 #include "Heap.h"
 #include "HeapFactory.h"
-#include <cassert>
+#include "MemoryPool.h"
+
+static MemoryPool memPool;
 
 void * operator new(size_t size, Heap * pHeap);
 void * operator new(size_t size);

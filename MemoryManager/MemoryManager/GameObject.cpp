@@ -28,7 +28,4 @@ void GameObject::Update()
 	delete x;
 	delete x2;
 	delete x3;
-
-	std::cout << "prev:" << &((AllocHeader*)this)->_prev << std::endl;
-	std::cout << "next: " << &((AllocHeader*)this)->_next << "\n";
 }

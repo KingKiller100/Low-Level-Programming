@@ -1,5 +1,4 @@
 #pragma once
-#include <cstdio>
 
 #define MEMSYSTEM_SIGNATURE 0xdeadc0de //233495774
 #define MEMSYSTEM_ENDMARKER 0xdeadbeef //218815710
@@ -17,17 +16,16 @@ public:
 	Heap();
 	Heap(char* name);
 
-	void Initialise(const char* n);
+	void Initialize(const char* n);
 
 	void SetName(char* n)							{ m_name = n; }
 	char* GetName() const							{ return m_name; };
 	
-	void AddAllocation(size_t size);
-	void RemoveAllocation(size_t size);
+	void AddAllocation(const size_t &size);
+	void RemoveAllocation(const size_t &size);
 	size_t TotalAllocation() const					{ return m_allocatedBytes; }
-
-	void WalkHeap();
-
+	
+	void WalkHeap(); // Walks through the current AllocHeader
 };
 
 struct AllocHeader

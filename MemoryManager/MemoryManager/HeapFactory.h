@@ -4,9 +4,6 @@
 
 class HeapFactory
 {
-private:
-	static Heap *_defaultHeap;
-	static std::vector<Heap*> heapContainer;
 public:
 	HeapFactory();
 	~HeapFactory();
@@ -14,6 +11,10 @@ public:
 	static Heap *CreateHeap(const char * szName);
 	static Heap* GetDefaultHeap();
 
-	static void WalkHeap(int id);
+	static void WalkTheHeap(const size_t &id);
+
+private:
+	static Heap *_defaultHeap;
+	static std::vector<Heap*> heapContainer;
 };
 

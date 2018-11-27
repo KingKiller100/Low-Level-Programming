@@ -3,10 +3,15 @@
 class MemoryPool
 {
 public:
-	MemoryPool(size_t iObjectsize);
+	MemoryPool();
+	void Initialize();
 	~MemoryPool();
 
 	void *Alloc(size_t iSize);
-	void Free(void *p, size_t i_size);
+	void FreeMemory(void *p, size_t i_size);
+
+private:
+	char memBlock[8192];
+	char* _currentAddress;
 };
 

@@ -8,6 +8,9 @@ HeapFactory::HeapFactory() {}
 
 HeapFactory::~HeapFactory()
 {
+
+	if (_defaultHeap)
+		free(_defaultHeap);
 	for (Heap* heap : heapContainer)
 		free(heap);
 }
@@ -17,7 +20,7 @@ Heap * HeapFactory::CreateHeap(const char * szName)
 	std::cout << "Creating Heap " << szName << "\n" << std::endl;
 	
 	Heap* newHeap = (Heap*)malloc(sizeof(Heap));
-	newHeap->Initialise(szName);
+	newHeap->Initialize(szName);
 
 	heapContainer.emplace_back(newHeap);	
 	return newHeap;
@@ -29,15 +32,23 @@ Heap* HeapFactory::GetDefaultHeap()
 		return _defaultHeap;
 
 	_defaultHeap = (Heap*)malloc(sizeof(Heap));
-	_defaultHeap->Initialise("default");
+	_defaultHeap->Initialize("default");
 
 	heapContainer.emplace_back(_defaultHeap);
 
-	return _defaultHeap;
+	return heapContainer.at(0);
 }
 
-void HeapFactory::WalkHeap(int id)
+void HeapFactory::WalkTheHeap(const size_t &id)
 {
-	if (heapContainer.at(id))
+	if (id == 0)
+	{
+		_defaultHeap->WalkHeap();
+		return;
+	}
+
+	if (id < heapContainer.size())
 		heapContainer.at(id)->WalkHeap();
+	else
+		std::cout << "outside heap container scope \n" << std::endl;
 }
