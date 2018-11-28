@@ -6,8 +6,8 @@ void * operator new(size_t size, Heap * pHeap)
 {
 	memPool.Initialize();
 	const size_t iRequestedBytes = size + sizeof(AllocHeader) + sizeof(int);
-	auto *pMem = (char*)memPool.Alloc(iRequestedBytes);
-	//auto *pMem = (char*)malloc(iRequestedBytes);
+	//auto *pMem = static_cast<char*>(memPool.Alloc(iRequestedBytes));
+	auto *pMem = static_cast<char*>(malloc(iRequestedBytes));
 	auto *pHeader = reinterpret_cast<AllocHeader*>(pMem);
 	
 	pHeader->iSignature = MEMSYSTEM_SIGNATURE;

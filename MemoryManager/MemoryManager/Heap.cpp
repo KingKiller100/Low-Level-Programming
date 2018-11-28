@@ -44,11 +44,11 @@ void Heap::WalkHeap()
 	{
 		copyHeap = (AllocHeader*)_prevAddress; // casts to AllocHeader to find previous and next
 		
-		if (copyHeap->pHeap)
+		if (copyHeap)
 		{
-			if (copyHeap->_prev != nullptr)
+			if (copyHeap->_prev)
 			{
-				while (copyHeap->_prev || copyHeap != copyHeap->_prev)
+				while (copyHeap->_prev && copyHeap != copyHeap->_prev)
 				{
 					copyHeap = copyHeap->_prev;
 				}
@@ -89,5 +89,4 @@ void Heap::WalkHeap()
 		std::cout << m_name << ":\t" << " total bytes allocated on this heap (including AllocHeader): " << totalBytes << "\n" << std::endl;
 	else
 		std::cout << m_name << " heap is empty \n" << std::endl;
-
 }
