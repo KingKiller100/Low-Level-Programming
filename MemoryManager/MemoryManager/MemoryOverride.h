@@ -19,5 +19,10 @@ public:
 	{
 		::operator delete(pMem);
 	}
+
+	void operator delete[](void *pMem, size_t size)
+	{
+		::operator delete[](pMem);
+	}
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 
 class MemoryPool
 {
@@ -7,11 +8,16 @@ public:
 	void Initialize();
 	~MemoryPool();
 
-	void *Alloc(size_t iSize);
+	static MemoryPool* Instance();
+
+	void Alloc(const void *ptr, const size_t &iSize);
 	void FreeMemory(void *p, size_t i_size);
+	void Status();
 
 private:
-	char memBlock[8192];
-	char* _currentAddress;
+	static MemoryPool* _instance;
+	std::map<const void*, size_t> poolMap;
+	size_t totalMemorySize;
+	int noOfPtrs;
 };
 

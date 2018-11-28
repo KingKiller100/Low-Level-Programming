@@ -7,7 +7,7 @@ void * operator new(size_t size, Heap * pHeap)
 	memPool.Initialize();
 	const size_t iRequestedBytes = size + sizeof(AllocHeader) + sizeof(int);
 	//auto *pMem = static_cast<char*>(memPool.Alloc(iRequestedBytes));
-	auto *pMem = static_cast<char*>(malloc(iRequestedBytes));
+	auto pMem = static_cast<char*>(malloc(iRequestedBytes));
 	auto *pHeader = reinterpret_cast<AllocHeader*>(pMem);
 	
 	pHeader->iSignature = MEMSYSTEM_SIGNATURE;
@@ -30,6 +30,8 @@ void * operator new(size_t size, Heap * pHeap)
 	*pEndMarker = MEMSYSTEM_ENDMARKER;
 
 	pHeap->AddAllocation(iRequestedBytes);
+	memPool.Alloc(pMem, iRequestedBytes);
+
 	return pStartMemBlock;
 }
 
@@ -53,10 +55,8 @@ void operator delete(void * pMem)
 	if (next)	
 		next->_prev = prev;
 
-
 	if (prev)	
-		prev->_next = next;
-			
+		prev->_next = next;			
 
 	if (!prev && !next)
 		heap->_prevAddress = nullptr;
@@ -69,6 +69,13 @@ void operator delete(void * pMem)
 	assert(*pEndMarker == MEMSYSTEM_ENDMARKER);
 
 	heap->RemoveAllocation(size + sizeof(AllocHeader) + sizeof(int));
+	memPool.FreeMemory(pMem, size);
 
-	//free(pHeader);
+	free(pHeader);
 }
+
+void operator delete [](void* pMem) noexcept
+{
+	operator delete(pMem);
+}
+

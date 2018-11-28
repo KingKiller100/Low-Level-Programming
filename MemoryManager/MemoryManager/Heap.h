@@ -7,9 +7,9 @@ class Heap
 {
 private:
 	char* m_name;
+	size_t m_allocatedBytes;
 
 public:
-	size_t m_allocatedBytes;
 	void *_prevAddress;
 
 public:
@@ -18,7 +18,7 @@ public:
 
 	void Initialize(const char* n);
 
-	void SetName(char* n)							{ m_name = n; }
+	void SetName(const char* n)						{ m_name = const_cast<char*>(n); }
 	char* GetName() const							{ return m_name; };
 	
 	void AddAllocation(const size_t &size);
