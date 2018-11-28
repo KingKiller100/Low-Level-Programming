@@ -38,27 +38,28 @@ void Heap::WalkHeap()
 {
 	AllocHeader* copyHeap;
 	size_t totalBytes = 0;
+	unsigned int count = 0;
 
-	if (_prevAddress) // get last look at address on the heap
+	if (_prevAddress) // get last looked at address on the heap
 	{
 		copyHeap = (AllocHeader*)_prevAddress; // casts to AllocHeader to find previous and next
 		
-		if (copyHeap)
+		if (copyHeap->pHeap)
 		{
 			if (copyHeap->_prev != nullptr)
 			{
-				while (copyHeap->_prev && copyHeap != copyHeap->_prev)
+				while (copyHeap->_prev || copyHeap != copyHeap->_prev)
 				{
 					copyHeap = copyHeap->_prev;
 				}
 
 				size_t requestedBytes = copyHeap->iSize + sizeof(AllocHeader) + sizeof(int);
 
-				if (m_name != (char*)"default")
-					std::cout << copyHeap->pHeap->GetName() << " size for each class allocated on the heap (excluding AllocHeader): " << requestedBytes << std::endl;
-
 				while (true)
 				{
+					if (m_name != (char*)"default")
+						std::cout << copyHeap->pHeap->GetName() << " " << ++count << ":\t" << " size for each class allocated on the heap (excluding AllocHeader): " << requestedBytes << std::endl;
+
 					assert(copyHeap->iSignature == MEMSYSTEM_SIGNATURE);
 
 					auto *pEndMem = (int*)(int*)((char*)copyHeap + copyHeap->iSize + sizeof(AllocHeader));
@@ -77,12 +78,16 @@ void Heap::WalkHeap()
 				size_t requestedBytes = m_allocatedBytes + sizeof(AllocHeader) + sizeof(int);
 
 				if (m_name != (char*)"default")
-					std::cout << GetName() << " size for each class allocated on the heap (excluding AllocHeader): " << requestedBytes << std::endl;
+					std::cout << GetName() << ":\t size for each class allocated on the heap (excluding AllocHeader): " << requestedBytes << std::endl;
 
 				totalBytes += m_allocatedBytes;
 			}
 		}
 	}
-	
-	std::cout << m_name << " heap's total bytes allocated on this heap: " << totalBytes << "\n" << std::endl;
+
+	if (totalBytes > 0)
+		std::cout << m_name << ":\t" << " total bytes allocated on this heap (including AllocHeader): " << totalBytes << "\n" << std::endl;
+	else
+		std::cout << m_name << " heap is empty \n" << std::endl;
+
 }

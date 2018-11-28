@@ -6,7 +6,8 @@ void * operator new(size_t size, Heap * pHeap)
 {
 	memPool.Initialize();
 	const size_t iRequestedBytes = size + sizeof(AllocHeader) + sizeof(int);
-	auto *pMem = (char*)malloc(iRequestedBytes);
+	auto *pMem = (char*)memPool.Alloc(iRequestedBytes);
+	//auto *pMem = (char*)malloc(iRequestedBytes);
 	auto *pHeader = reinterpret_cast<AllocHeader*>(pMem);
 	
 	pHeader->iSignature = MEMSYSTEM_SIGNATURE;
@@ -21,13 +22,6 @@ void * operator new(size_t size, Heap * pHeap)
 		pHeader->_prev = copy;
 		copy->_next = pHeader;
 	}
-	/*else
-	{
-		pHeader->_next = nullptr;
-		auto *copy = static_cast<AllocHeader*>(pHeader->pHeap->_prevAddress);
-		pHeader->_prev = copy;
-		copy->_next = pHeader;
-	}*/
 
 	pHeader->pHeap->_prevAddress = pHeader; // Points at itself
 
