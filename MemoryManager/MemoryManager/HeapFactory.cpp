@@ -34,9 +34,9 @@ Heap* HeapFactory::GetDefaultHeap()
 	_defaultHeap = (Heap*)malloc(sizeof(Heap));
 	_defaultHeap->Initialize("default");
 
-	heapContainer.emplace_back(_defaultHeap);
+	//heapContainer.emplace_back(_defaultHeap);
 
-	return heapContainer.at(0);
+	return _defaultHeap;
 }
 
 void HeapFactory::WalkTheHeap(const size_t &id)
@@ -47,8 +47,8 @@ void HeapFactory::WalkTheHeap(const size_t &id)
 		return;
 	}
 
-	if (id < heapContainer.size())
-		heapContainer.at(id)->WalkHeap();
+	if (id - 1 < heapContainer.size())
+		heapContainer.at(id - 1)->WalkHeap();
 	else
 		std::cout << "outside heap container scope \n" << std::endl;
 }

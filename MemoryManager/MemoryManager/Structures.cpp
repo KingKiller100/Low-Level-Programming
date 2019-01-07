@@ -4,7 +4,7 @@
 
 void * operator new(size_t size, Heap * pHeap)
 {
-	memPool.Initialize();
+	// memPool.Initialize();
 	const size_t iRequestedBytes = size + sizeof(AllocHeader) + sizeof(int);
 	//auto *pMem = static_cast<char*>(memPool.Alloc(iRequestedBytes));
 	auto pMem = static_cast<char*>(malloc(iRequestedBytes));
@@ -30,7 +30,7 @@ void * operator new(size_t size, Heap * pHeap)
 	*pEndMarker = MEMSYSTEM_ENDMARKER;
 
 	pHeap->AddAllocation(iRequestedBytes);
-	memPool.Alloc(pMem, iRequestedBytes);
+	// memPool.Alloc(pMem, iRequestedBytes);
 
 	return pStartMemBlock;
 }
@@ -69,7 +69,7 @@ void operator delete(void * pMem)
 	assert(*pEndMarker == MEMSYSTEM_ENDMARKER);
 
 	heap->RemoveAllocation(size + sizeof(AllocHeader) + sizeof(int));
-	memPool.FreeMemory(pMem, size);
+	// memPool.FreeMemory(pMem, size);
 
 	free(pHeader);
 }
